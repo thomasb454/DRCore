@@ -1,0 +1,10 @@
+name: DRCore
+main: com.lishaodong.drcore.DRCore
+version: 0.0.1
+
+depend: [WorldGuard]
+commands:
+  zone:
+    aliases: [zone]
+    description: set zone of a region
+    usage: /<command>

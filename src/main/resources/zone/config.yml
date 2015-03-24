@@ -1,0 +1,21 @@
+safe:
+    GREET_MESSAGE: '             &a&l*** SAFE ZONE (DMG-OFF) ***'
+    MOB_DAMAGE: false
+    PVP: false
+    MOB_SPAWNING: false
+    FEED_DELAY: 5
+    FEED_AMOUNT: 1
+    MIN_FOOD: 0
+
+milderness: 
+    GREET_MESSAGE: '          &e&l*** WILDERNESS (MOBS-ON,PVP-OFF) ***'
+    MOB_DAMAGE: true
+    PVP: false
+    MOB_SPAWNING: true
+
+
+chaotic: 
+    GREET_MESSAGE: '              &c&l*** CHAOTIC ZONE (PVP-ON) ***'
+    MOB_DAMAGE: true
+    PVP: true
+
