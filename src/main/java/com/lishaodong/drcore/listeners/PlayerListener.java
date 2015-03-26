@@ -20,14 +20,15 @@ public class PlayerListener implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 
-		player.setHealthScale(20);
-		player.setExp(1);
-		if (!plugin.infos.containsKey(player.getName())) {
-			plugin.addPlayer(player);
+		
+		LocalPlayer localPlayer;
+		if (!plugin.localPlayers.containsKey(player.getName())) {
+			localPlayer=plugin.addLocalPlayer(player);
 		}else{
-			LocalPlayer localPlayer = plugin.infos.get(player.getName());
+			localPlayer = plugin.getLocalPlayer(player.getName());
 			localPlayer.player = player;
 		}
+		localPlayer.enterWorld();
 	}
 
 }

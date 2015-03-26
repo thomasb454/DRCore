@@ -1,7 +1,8 @@
 package com.lishaodong.drcore;
 
+
 public class Constants {
-	public static String configPath(String folderName, String fileName){
-		return  "plugins/DRCore/"+folderName+"/"+fileName+".yml";
+	public static String ymlPath(String name){
+		return  "plugins/DRCore/"+name+"/data.yml";
 	}
 }

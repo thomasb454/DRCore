@@ -9,26 +9,34 @@ import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.entity.Player;
 
+import com.lishaodong.drcore.energy.EnergySystem;
+import com.lishaodong.drcore.health.HealthSystem;
+
 @SerializableAs("LocalPlayer")
 public class LocalPlayer implements ConfigurationSerializable {
 	public Player player;
 	
+	public HealthSystem health = new HealthSystem(this);
+	public EnergySystem energy = new EnergySystem(this);
+	
 	public DRCore plugin;
 	public String name;
-	public int maxEnergy = 100;
 	public Alignment alignment = Alignment.NONE;
 	// regenerate each second
-	public int energySpeed = 10;
-	public int healthSpeed = 5;
-	public boolean locked = false;
-	public boolean canLoseEnergy = true;
 	public String currentZone = "none";
 
+	public LocalPlayer(Player player, DRCore plugin) {
+		player.setMaxHealth(50);
+		this.plugin = plugin;
+		this.name = player.getName();
+		this.player = player;
+	}
+	
 	public LocalPlayer(Map<String, Object> map) {
+		plugin=(DRCore) Bukkit.getPluginManager().getPlugin("DRCore");
 		name = (String) map.get("name");
-		maxEnergy = (Integer) map.get("maxEnergy");
-		energySpeed = (Integer) map.get("energySpeed");
-		healthSpeed = (Integer) map.get("healthSpeed");
+		health = (HealthSystem) map.get("health");
+		health.localPlayer=this;
 	}
 
 	public LocalPlayer() {
@@ -39,52 +47,46 @@ public class LocalPlayer implements ConfigurationSerializable {
 
 		Map<String, Object> map = new TreeMap<String, Object>();
 		map.put("name", name);
-		map.put("maxEnergy", maxEnergy);
-		map.put("energySpeed", energySpeed);
-		map.put("healthSpeed", healthSpeed);
+		map.put("health", health);
 		return map;
 	}
 
-	public void lockEnergyRegen() {
-		locked = true;
-		plugin.logger.info("lock energy regen");
-		plugin.scheduler.scheduleSyncDelayedTask(plugin, new Runnable() {
-			public void run() {
-				plugin.logger.info("unlock energy regen");
-				locked = false;
-			}
-		}, 40L);
-	}
 
-	public boolean canLoseEnergy() {
-		// TODO Auto-generated method stub
-		return canLoseEnergy;
-	}
+	
 
 	public void setCurrentZone(String type) {
 		switch (type.toLowerCase()) {
 		case "safe":
-			canLoseEnergy = false;
+			energy.canLoseEnergy = false;
 			setAlignment(Alignment.LAWFUL);
 			break;
 		case "wilderness":
-			canLoseEnergy = true;
+			energy.canLoseEnergy = true;
 			break;
-
 		case "choatic":
-			canLoseEnergy = true;
+			energy.canLoseEnergy = true;
 			break;
-
 		case "none":
-			canLoseEnergy = true;
+			energy.canLoseEnergy = true;
 			break;
 		default:
 			break;
 		}
-		
 	}
 	public void setAlignment(Alignment alignment){
 		this.alignment = alignment;
 		player.sendMessage(plugin.getConfig().getString("alignment."+alignment.name+".GREETING_MESSAGE"));
+	}
+
+	public void gotDamaged() {
+		plugin.taskManager.resetRegenHealthTask(this);
+	}
+	
+	public void enterWorld(){
+		plugin.taskManager.resetRegenHealthTask(this);
+		plugin.taskManager.setEnergyTask(this);
+
+		player.setHealthScale(20);
+		player.setExp(1);
 	}
 }

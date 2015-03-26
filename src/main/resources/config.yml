@@ -1,5 +1,60 @@
 
 
-alignment:
-    lawful:
+alignment: 
+    lawful: 
         GREETING_MESSAGE: 'you now are in LAWFUL alginment.'
+
+zone: 
+    safe: 
+        GREET_MESSAGE: '             &a&l*** SAFE ZONE (DMG-OFF) ***'
+        LEAF_DECAY: false
+        BLOCK_BREAK: false
+        MOB_DAMAGE: false
+        USE: true
+        PVP: false
+        CHEST_ACCESS: true
+        MOB_SPAWNING: false
+        FEED_DELAY: 5
+        FEED_AMOUNT: 1
+        MIN_FOOD: 0
+        BLOCK_TNT: true
+        BLOCK_TNT_BLOCK_DAMAGE: true
+        BLOCK_LIGHTER: true
+        DISABLE_LAVA_FIRE_SPREAD: true
+        DISABLE_ALL_FIRE_SPREAD: true
+        DISABLE_CREATURE_TRAMPLING: true
+        DISABLE_PLAYER_TRAMPLING: true
+
+    wilderness: 
+        GREET_MESSAGE: '          &e&l*** WILDERNESS (MOBS-ON,PVP-OFF) ***'
+        BLOCK_BREAK: false
+        LEAF_DECAY: false
+        MOB_DAMAGE: true
+        PVP: false
+        CHEST_ACCESS: true
+        MOB_SPAWNING: true
+        BLOCK_TNT: true
+        BLOCK_TNT_BLOCK_DAMAGE: true
+        BLOCK_LIGHTER: true
+        DISABLE_LAVA_FIRE_SPREAD: true
+        DISABLE_ALL_FIRE_SPREAD: true
+        DISABLE_CREATURE_TRAMPLING: true
+        DISABLE_PLAYER_TRAMPLING: true
+
+
+    chaotic: 
+        GREET_MESSAGE: '              &c&l*** CHAOTIC ZONE (PVP-ON) ***'
+        BLOCK_BREAK: false
+        MOB_DAMAGE: true
+        LEAF_DECAY: false
+        PVP: true
+        CHEST_ACCESS: true
+        BLOCK_TNT: true
+        BLOCK_TNT_BLOCK_DAMAGE: true
+        BLOCK_LIGHTER: true
+        DISABLE_LAVA_FIRE_SPREAD: true
+        DISABLE_ALL_FIRE_SPREAD: true
+        DISABLE_CREATURE_TRAMPLING: true
+        DISABLE_PLAYER_TRAMPLING: true
+
+

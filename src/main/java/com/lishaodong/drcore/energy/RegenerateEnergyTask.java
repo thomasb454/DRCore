@@ -13,36 +13,22 @@ import com.lishaodong.drcore.RunnableTask;
 
 public class RegenerateEnergyTask extends RunnableTask<DRCore> {
 	public boolean locked = false;
+	private LocalPlayer localPlayer;
 
-	public RegenerateEnergyTask(DRCore plugin) {
+	public RegenerateEnergyTask(DRCore plugin, LocalPlayer localPlayer) {
 		super(plugin);
+		this.localPlayer = localPlayer;
 	}
 
 	Logger logger = Bukkit.getLogger();
 
 	public void run() {
-		// Main info = (Main) Bukkit.getPluginManager().getPlugin("PlayerInfo");
-		// if(info==null){
-		// info = (Main) Bukkit.getPluginManager().getPlugin("PlayerInfo");
-		// infos = info.infos;
-		// }
-		Player[] players = Bukkit.getOnlinePlayers();
-		for (Player player : players) {
-			regenerateEnergy(player);
-
-		}
-	}
-
-	public void regenerateEnergy(Player player) {
-		LocalPlayer info = plugin.infos.get(player.getName());
-		if(info==null){
-			plugin.addPlayer(player);
-		}
-		if (info.locked)
+		if (localPlayer.energy.locked)
 			return;
-		float amount = info.energySpeed * EnergySystem.REGEN;
+		float amount = localPlayer.energy.regenSpeed * EnergySystem.REGEN;
 		// logger.info("regen:"+amount);
-		EnergySystem.changeEnergy(player, amount);
+		localPlayer.energy.changeEnergy(amount);
 	}
+
 
 }

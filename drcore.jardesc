@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="BukkitServer/dist/plugins/DRCore-0.0.1.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/DRCore/drcore.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="true" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <folder path="/DRCore/dist"/>
+        <javaElement handleIdentifier="=DRCore/src\/main\/java"/>
+        <javaElement handleIdentifier="=DRCore/src\/main\/resources"/>
+        <file path="/DRCore/.project"/>
+        <file path="/DRCore/.gitignore"/>
+        <file path="/DRCore/pom.xml"/>
+        <folder path="/DRCore/target"/>
+        <file path="/DRCore/.classpath"/>
+        <folder path="/DRCore/src"/>
+        <javaElement handleIdentifier="=DRCore/src\/test\/java"/>
+        <javaElement handleIdentifier="=DRCore/src\/test\/resources"/>
+        <file path="/DRCore/.DS_Store"/>
+    </selectedElements>
+</jardesc>

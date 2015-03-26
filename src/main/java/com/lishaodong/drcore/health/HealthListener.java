@@ -12,6 +12,7 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.inventory.ItemStack;
 
 import com.lishaodong.drcore.DRCore;
+import com.lishaodong.drcore.LocalPlayer;
 import com.lishaodong.drcore.energy.RegenerateEnergyTask;
 
 public class HealthListener implements Listener {
@@ -23,12 +24,10 @@ public class HealthListener implements Listener {
 	}
 
 	@EventHandler(priority = EventPriority.MONITOR)
-	public void entityDamage(EntityDamageByEntityEvent event) {
+	public void entityDamageByEntity(EntityDamageByEntityEvent event) {
 		Entity damager = event.getDamager();
-		Entity defender = event.getEntity();
-		Player player;
 		if (damager instanceof Player) {
-			resetHealthTask((Player) damager);
+			damagePlayer((Player) damager);
 		}
 	}
 
@@ -46,7 +45,7 @@ public class HealthListener implements Listener {
 		if (defender instanceof Player) {
 			player = (Player) defender;
 
-			resetHealthTask(player);
+			damagePlayer(player);
 			if (event.getCause() == DamageCause.FALL) {
 				double health = player.getHealth();
 				if (event.getDamage() >= health)
@@ -55,7 +54,7 @@ public class HealthListener implements Listener {
 		}
 	}
 
-	public void resetHealthTask(Player player) {
-		plugin.resetHealthTask();
+	public void damagePlayer(Player player) {
+		plugin.getLocalPlayer(player.getName()).gotDamaged();
 	}
 }

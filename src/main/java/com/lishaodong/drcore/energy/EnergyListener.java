@@ -26,7 +26,7 @@ public class EnergyListener implements Listener {
 			Player player = (Player) damager;
 			ItemStack stack = player.getInventory().getItemInHand();
 			// set depend on tier of stack
-			EnergySystem.changeEnergy(player, -0.08f);
+			plugin.getLocalPlayer(player.getName()).energy.changeEnergy(-0.08f);
 		}
 	}
 }
