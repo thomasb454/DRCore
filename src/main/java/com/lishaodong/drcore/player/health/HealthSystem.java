@@ -1,4 +1,4 @@
-package com.lishaodong.drcore.health;
+package com.lishaodong.drcore.player.health;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -10,17 +10,17 @@ import org.bukkit.entity.Player;
 
 import com.lishaodong.drcore.DRCore;
 import com.lishaodong.drcore.LocalPlayer;
+import com.lishaodong.drcore.player.AttributeSystem;
 
-public class HealthSystem implements ConfigurationSerializable{
-
-	public LocalPlayer localPlayer;
+public class HealthSystem extends AttributeSystem {
 
 	public int regenSpeed = 5;
 	
 	public HealthSystem(LocalPlayer player) {
-		this.localPlayer = player;
+		super(player);
 	}
 	public HealthSystem(Map<String, Object> map) {
+		super(null);
 		regenSpeed = (int) map.get("regenSpeed");
 	}
 	public void setHealth(double current) {

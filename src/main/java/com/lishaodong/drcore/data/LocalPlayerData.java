@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -13,19 +14,26 @@ import com.lishaodong.drcore.LocalPlayer;
 public class LocalPlayerData extends DRData{
 
 	private DRCore plugin;
-
+	
+	public HashMap<String, LocalPlayer> localPlayers = new HashMap<String, LocalPlayer>();
 	public LocalPlayerData(DRCore plugin) {
-		super("LocalPlayer",plugin);
+		super("player",plugin);
 	}
 
 	@Override
 	public void load() {
 		super.load();
-		plugin.localPlayers=((HashMap<String, LocalPlayer>) get("players"));
+		ConfigurationSection section = getConfigurationSection("players");
+		if(section==null)
+			return;
+		for(String key: section.getKeys(false)){
+			LocalPlayer player = (LocalPlayer) section.get(key);
+			localPlayers.put(key, player);
+		}
 	}
 	@Override
 	public void save() {
-		set("players", plugin.localPlayers);
+		this.createSection("players",localPlayers);
 		super.save();
 	}
 }

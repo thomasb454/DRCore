@@ -17,22 +17,22 @@ import org.bukkit.scheduler.BukkitScheduler;
 import com.avaje.ebeaninternal.api.LoadContext;
 import com.lishaodong.drcore.commands.CommandManager;
 import com.lishaodong.drcore.data.DRData;
-import com.lishaodong.drcore.data.DataManager;
 import com.lishaodong.drcore.listeners.ListnerManager;
+import com.lishaodong.drcore.player.PlayerManager;
 import com.lishaodong.drcore.tasks.TaskManager;
 import com.lishaodong.drcore.zone.ZoneManager;
 
 public class DRCore extends JavaPlugin {
-	public HashMap<String, LocalPlayer> localPlayers = new HashMap<String, LocalPlayer>();
 
 	public BukkitScheduler scheduler;
-	public DataManager dataManager;
 	public ListnerManager listnerManager; 
 	public TaskManager taskManager;
 	public Logger logger;
 
-	public ZoneManager zoneManager;
 	public CommandManager commandManager;
+	//feature manager
+	public ZoneManager zoneManager;
+	public PlayerManager playerManager;
 
 	public DRCore() {
 	}
@@ -40,7 +40,7 @@ public class DRCore extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		saveConfig();
-		dataManager.saveAll();
+		DRData.saveAll();
 	}
 
 	@Override
@@ -48,40 +48,32 @@ public class DRCore extends JavaPlugin {
 		ConfigurationSerialization.registerClass(LocalPlayer.class,"PlayerInfo");
 		logger = getLogger();
 		
-		for(Player player:Bukkit.getOnlinePlayers()){
-			if(!localPlayers.containsKey(player.getName())){
-				addLocalPlayer(player);
-			}
-		}
+		
 		scheduler = Bukkit.getServer().getScheduler();
 		saveDefaultConfig();
 		
 
-		dataManager = new DataManager(this);
 		
 		listnerManager = new ListnerManager(this);
 		commandManager = new CommandManager(this);
-		taskManager = new TaskManager(this);
 		
 		//feature manager
+		playerManager = new PlayerManager(this);
 		zoneManager = new ZoneManager(this);
+
+		taskManager = new TaskManager(this);
 		
-		dataManager.loadAll();
+		playerManager.loadOnlinePlayers();
 	
 	}
-
-
-
-	
-
 	public LocalPlayer getLocalPlayer(String name) {
-		return localPlayers.get(name);
+		return playerManager.getLocalPlayer(name);
 	}
 
 
-	public LocalPlayer addLocalPlayer(Player player) {
-		LocalPlayer localPlayer = new LocalPlayer(player,this);
-		localPlayers.put(player.getName(), localPlayer);
-		return localPlayer;
-	}
+
+
+	
+
+	
 }

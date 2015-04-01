@@ -1,4 +1,4 @@
-package com.lishaodong.drcore.energy;
+package com.lishaodong.drcore.player.energy;
 
 import java.util.logging.Logger;
 

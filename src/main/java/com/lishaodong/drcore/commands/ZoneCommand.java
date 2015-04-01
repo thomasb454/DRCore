@@ -33,8 +33,7 @@ public class ZoneCommand implements CommandExecutor{
 		// TODO Auto-generated method stub
 		
 		if(arg[0].equals("reload")){
-			manager.plugin.reloadConfig();
-			manager.loadConfig();
+			manager.reloadConfig();
 			sender.sendMessage("Config of Zone Plugin has been reloaded");
 			return true;
 		}

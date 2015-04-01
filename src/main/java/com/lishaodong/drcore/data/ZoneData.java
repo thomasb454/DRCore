@@ -1,7 +1,6 @@
-package com.lishaodong.drcore.zone;
+package com.lishaodong.drcore.data;
 
 import com.lishaodong.drcore.DRCore;
-import com.lishaodong.drcore.data.DRData;
 
 public class ZoneData extends DRData {
 

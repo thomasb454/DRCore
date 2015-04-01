@@ -1,4 +1,4 @@
-package com.lishaodong.drcore.health;
+package com.lishaodong.drcore.player.health;
 
 import java.util.HashMap;
 import java.util.logging.Logger;

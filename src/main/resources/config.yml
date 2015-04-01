@@ -1,8 +1,12 @@
 
-
-alignment: 
-    lawful: 
-        GREETING_MESSAGE: 'you now are in LAWFUL alginment.'
+player: 
+    alignment: 
+        LAWFUL: 
+            GREETING_MESSAGE: 'You now are in LAWFUL alginment.'
+        NEUTRAL: 
+            GREETING_MESSAGE: 'You now are in NEUTRAL alginment.'
+        CHAOTIC: 
+            GREETING_MESSAGE: 'You now are in CHAOTIC alginment.'
 
 zone: 
     safe: 

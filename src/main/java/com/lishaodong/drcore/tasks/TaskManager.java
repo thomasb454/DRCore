@@ -9,10 +9,10 @@ import org.bukkit.scheduler.BukkitScheduler;
 import com.lishaodong.drcore.DRCore;
 import com.lishaodong.drcore.LocalPlayer;
 import com.lishaodong.drcore.Manager;
-import com.lishaodong.drcore.energy.EnergySystem;
-import com.lishaodong.drcore.energy.RegenerateEnergyTask;
-import com.lishaodong.drcore.energy.RunningTask;
-import com.lishaodong.drcore.health.RegenerateHealthTask;
+import com.lishaodong.drcore.player.energy.EnergySystem;
+import com.lishaodong.drcore.player.energy.RegenerateEnergyTask;
+import com.lishaodong.drcore.player.energy.RunningTask;
+import com.lishaodong.drcore.player.health.RegenerateHealthTask;
 
 public class TaskManager extends Manager {
 
@@ -26,7 +26,7 @@ public class TaskManager extends Manager {
 		// damageListener = new DamageListener(this);
 
 		scheduler = plugin.scheduler;
-		
+		saveData();
 	}
 	public void resetRegenHealthTask(LocalPlayer localPlayer) {
 		try {
@@ -47,5 +47,9 @@ public class TaskManager extends Manager {
 
 		scheduler.scheduleSyncRepeatingTask(plugin,
 				new RegenerateEnergyTask(plugin,localPlayer), 0L, EnergySystem.REGEN_GAP);
+	}
+	public void saveData(){
+		scheduler.scheduleSyncRepeatingTask(plugin,
+				new SaveDataTask(plugin), 0L, 20*60*6);
 	}
 }

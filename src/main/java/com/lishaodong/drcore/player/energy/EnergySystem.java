@@ -1,4 +1,4 @@
-package com.lishaodong.drcore.energy;
+package com.lishaodong.drcore.player.energy;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -9,8 +9,9 @@ import org.bukkit.entity.Player;
 
 import com.lishaodong.drcore.DRCore;
 import com.lishaodong.drcore.LocalPlayer;
+import com.lishaodong.drcore.player.AttributeSystem;
 
-public class EnergySystem implements ConfigurationSerializable{
+public class EnergySystem extends AttributeSystem{
 
 	public static final int RUN_LOSE = 25;
 	public static final int RUN_GAP = 10;
@@ -24,16 +25,16 @@ public class EnergySystem implements ConfigurationSerializable{
 	public int regenSpeed = 10;
 	public int maxEnergy = 100;
 
-	public LocalPlayer localPlayer;
 
 	public boolean locked = false;
 	public boolean canLoseEnergy = true;
 	
 	public EnergySystem(LocalPlayer localPlayer) {
-		this.localPlayer = localPlayer;
+		super(localPlayer);
 	}
 	
 	public EnergySystem(Map<String, Object> map) {
+		super(null);
 		regenSpeed = (int) map.get("regenSpeed");
 		maxEnergy = (Integer) map.get("maxEnergy");
 	}

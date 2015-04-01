@@ -1,4 +1,4 @@
-package com.lishaodong.drcore.health;
+package com.lishaodong.drcore.player.health;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -13,7 +13,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.lishaodong.drcore.DRCore;
 import com.lishaodong.drcore.LocalPlayer;
-import com.lishaodong.drcore.energy.RegenerateEnergyTask;
+import com.lishaodong.drcore.player.energy.RegenerateEnergyTask;
 
 public class HealthListener implements Listener {
 	DRCore plugin;

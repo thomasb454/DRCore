@@ -4,8 +4,8 @@ import org.bukkit.plugin.PluginManager;
 
 import com.lishaodong.drcore.DRCore;
 import com.lishaodong.drcore.Manager;
-import com.lishaodong.drcore.energy.EnergyListener;
-import com.lishaodong.drcore.health.HealthListener;
+import com.lishaodong.drcore.player.energy.EnergyListener;
+import com.lishaodong.drcore.player.health.HealthListener;
 
 public class ListnerManager extends Manager{
 

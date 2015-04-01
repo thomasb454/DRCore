@@ -16,8 +16,12 @@ public class FeatureManager extends Manager{
 	public DRData data;
 	public ConfigurationSection config;
 	
+	public void reloadConfig(){
+		plugin.reloadConfig();
+		loadConfig();
+	}
 	public void loadConfig(){
-
 		config=plugin.getConfig().getConfigurationSection(name);
+		
 	}
 }

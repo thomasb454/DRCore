@@ -1,4 +1,4 @@
-package com.lishaodong.drcore.energy;
+package com.lishaodong.drcore.player.energy;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;

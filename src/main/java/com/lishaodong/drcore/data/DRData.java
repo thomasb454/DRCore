@@ -21,6 +21,7 @@ public class DRData extends YamlConfiguration{
 		this.plugin  = plugin;
 		this.name = name;
 		this.filePath = Constants.ymlPath(name);
+		load();
 		DATA_MAP.put(name, this);
 	}
 

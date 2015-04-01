@@ -4,6 +4,10 @@ version: 0.0.1
 
 depend: [WorldGuard]
 commands:
+  drcore: 
+    aliases: [dr]
+    description: core commands of dungeon realm plugin.
+    usage: /<command>
   zone:
     aliases: [zone]
     description: set zone of a region

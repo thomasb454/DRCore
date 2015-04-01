@@ -9,19 +9,22 @@ import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.entity.Player;
 
-import com.lishaodong.drcore.energy.EnergySystem;
-import com.lishaodong.drcore.health.HealthSystem;
+import com.lishaodong.drcore.player.alignment.Alignment;
+import com.lishaodong.drcore.player.alignment.AlignmentSystem;
+import com.lishaodong.drcore.player.energy.EnergySystem;
+import com.lishaodong.drcore.player.health.HealthSystem;
 
 @SerializableAs("LocalPlayer")
 public class LocalPlayer implements ConfigurationSerializable {
 	public Player player;
-	
+	//Attribute Systems
 	public HealthSystem health = new HealthSystem(this);
 	public EnergySystem energy = new EnergySystem(this);
+	public AlignmentSystem alignment = new AlignmentSystem(this);
 	
 	public DRCore plugin;
 	public String name;
-	public Alignment alignment = Alignment.NONE;
+	
 	// regenerate each second
 	public String currentZone = "none";
 
@@ -37,6 +40,10 @@ public class LocalPlayer implements ConfigurationSerializable {
 		name = (String) map.get("name");
 		health = (HealthSystem) map.get("health");
 		health.localPlayer=this;
+		energy = (EnergySystem) map.get("energy");
+		energy.localPlayer=this;
+		alignment = (AlignmentSystem) map.get("alignment");
+		alignment.localPlayer=this;
 	}
 
 	public LocalPlayer() {
@@ -44,21 +51,19 @@ public class LocalPlayer implements ConfigurationSerializable {
 	}
 
 	public Map<String, Object> serialize() {
-
 		Map<String, Object> map = new TreeMap<String, Object>();
 		map.put("name", name);
 		map.put("health", health);
+		map.put("energy", energy);
+		map.put("alignment",alignment);
 		return map;
 	}
-
-
-	
 
 	public void setCurrentZone(String type) {
 		switch (type.toLowerCase()) {
 		case "safe":
 			energy.canLoseEnergy = false;
-			setAlignment(Alignment.LAWFUL);
+			//setAlignment(Alignment.LAWFUL);
 			break;
 		case "wilderness":
 			energy.canLoseEnergy = true;
@@ -73,10 +78,6 @@ public class LocalPlayer implements ConfigurationSerializable {
 			break;
 		}
 	}
-	public void setAlignment(Alignment alignment){
-		this.alignment = alignment;
-		player.sendMessage(plugin.getConfig().getString("alignment."+alignment.name+".GREETING_MESSAGE"));
-	}
 
 	public void gotDamaged() {
 		plugin.taskManager.resetRegenHealthTask(this);
@@ -88,5 +89,9 @@ public class LocalPlayer implements ConfigurationSerializable {
 
 		player.setHealthScale(20);
 		player.setExp(1);
+	}
+
+	public void dead() {
+		plugin.logger.info(name+" dead when he is in "+alignment.alignment +" alignment.");
 	}
 }
